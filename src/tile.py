@@ -1,5 +1,5 @@
 from pygame import *
-import os
+from os import *
 
 import globals
 
@@ -26,13 +26,14 @@ def resize_set():
 	width /= 16
 	height /= 16
 	for id in set:
-		set[id].image = transform.scale(set[id].image, (width, height))
+		set[id].image = transform.scale(set[id].image, \
+				(width, height))
 
 def load_map():
 	global set
 	set = {}
 
-	for filename in os.listdir('res/tile'):
+	for filename in listdir('res/tile'):
 		set[filename.split('.')[0]] \
 			= Tile('res/tile/' + filename, True)
 
