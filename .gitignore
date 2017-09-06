@@ -1,2 +1,3 @@
-*.pyo
 run-game
+*.pyo
+*.swp
