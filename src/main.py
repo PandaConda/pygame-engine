@@ -1,5 +1,6 @@
-from pygame import *
-from sys import *
+import pygame
+from pygame.locals import *
+import sys
 
 import globals
 import tile
@@ -10,9 +11,13 @@ WINDOW_SIZE = (2400, 1350)
 
 def main():
 	# initialize
-	globals.screen = display.set_mode(WINDOW_SIZE)
+	pygame.init()
+	display = pygame.display
+	globals.screen = display.set_mode(( \
+			display.Info().current_w / 2, \
+			display.Info().current_h / 2))
 	display.set_caption("Prototype 2")
-	clock = time.Clock()
+	clock = pygame.time.Clock()
 	tile.load_map()
 	gameover = False
 
@@ -24,10 +29,10 @@ def main():
 		clock.tick(30)
 
 		# handle events
-		for e in event.get():
-			if not hasattr(e, 'key'):
+		for event in pygame.event.get():
+			if not hasattr(event, 'key'):
 				continue
-			if e.key == K_ESCAPE:
+			if event.key == K_ESCAPE:
 				gameover = True
 
 		# TODO update
@@ -41,7 +46,7 @@ def main():
 		display.flip()
 
 	# cleanup
-	exit(0)
+	sys.exit(0)
 
 if __name__ == "__main__":
 	main()

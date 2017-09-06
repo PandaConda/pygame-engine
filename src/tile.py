@@ -1,5 +1,5 @@
-from pygame import *
-from os import *
+import pygame
+import os
 
 import globals
 
@@ -13,7 +13,7 @@ class Tile:
 	solid = 0
 
 	def __init__(self, filepath, solid):
-		self.image = image.load(filepath)
+		self.image = pygame.image.load(filepath)
 		self.solid = solid
 
 	def render(self, x, y):
@@ -22,18 +22,18 @@ class Tile:
 
 def resize_set():
 	global set, width, height
-	width, height = display.get_surface().get_size()
+	width, height = pygame.display.get_surface().get_size()
 	width /= 16
 	height /= 16
 	for id in set:
-		set[id].image = transform.scale(set[id].image, \
+		set[id].image = pygame.transform.scale(set[id].image, \
 				(width, height))
 
 def load_map():
 	global set
 	set = {}
 
-	for filename in listdir('res/tile'):
+	for filename in os.listdir('res/tile'):
 		set[filename.split('.')[0]] \
 			= Tile('res/tile/' + filename, True)
 
