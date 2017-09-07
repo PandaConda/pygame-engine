@@ -2,12 +2,10 @@ import pygame
 from pygame.locals import *
 import sys
 
+import color
 import globals
+from room import Room
 import tile
-
-# constants
-BLACK = (0, 0, 0)
-WINDOW_SIZE = (2400, 1350)
 
 def main():
 	# initialize
@@ -16,9 +14,11 @@ def main():
 	globals.screen = display.set_mode(( \
 			display.Info().current_w / 2, \
 			display.Info().current_h / 2))
-	display.set_caption("Prototype 2")
+	display.set_caption('Prototype 2')
 	clock = pygame.time.Clock()
 	tile.load_map()
+	tile.resize_set()
+	room = Room('test')
 	gameover = False
 
 	# game loop
@@ -38,11 +38,8 @@ def main():
 		# TODO update
 
 		# render
-		globals.screen.fill(BLACK)
-		for x in xrange(0x10):
-			for y in xrange(0x10):
-				tile.map[(x << 4) + y].render(x, y);
-
+		globals.screen.fill(color.RED)
+		room.render()
 		display.flip()
 
 	# cleanup
